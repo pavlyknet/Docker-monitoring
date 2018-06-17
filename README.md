@@ -4,15 +4,13 @@ dockprom
 A monitoring solution for Docker hosts and containers with [Prometheus](https://prometheus.io/), [Grafana](http://grafana.org/), [cAdvisor](https://github.com/google/cadvisor), 
 [NodeExporter](https://github.com/prometheus/node_exporter) and alerting with [AlertManager](https://github.com/prometheus/alertmanager).
 
-***If you're looking for the Docker Swarm version please go to [stefanprodan/swarmprom](https://github.com/stefanprodan/swarmprom)***
-
 ## Install
 
 Clone this repository on your Docker host, cd into dockprom directory and run compose up:
 
 ```bash
-git clone https://github.com/stefanprodan/dockprom
-cd dockprom
+git clone https://github.com/pavlyknet/Docker-monitoring/
+cd Docker-monitoring/Docker-monitoring/
 
 ADMIN_USER=admin ADMIN_PASSWORD=admin docker-compose up -d
 ```
@@ -45,8 +43,6 @@ Grafana is preconfigured with dashboards and Prometheus as the default data sour
 
 ***Docker Host Dashboard***
 
-![Host](https://raw.githubusercontent.com/stefanprodan/dockprom/master/screens/Grafana_Docker_Host.png)
-
 The Docker Host Dashboard shows key metrics for monitoring the resource usage of your server:
 
 * Server uptime, CPU idle percent, number of CPU cores, available memory, swap and storage
@@ -70,7 +66,6 @@ You can find right value for your system in Prometheus `http://<host-ip>:9090` l
 
 ***Docker Containers Dashboard***
 
-![Containers](https://raw.githubusercontent.com/stefanprodan/dockprom/master/screens/Grafana_Docker_Containers.png)
 
 The Docker Containers Dashboard shows key metrics for monitoring running containers:
 
@@ -86,7 +81,6 @@ Note that this dashboard doesn't show the containers that are part of the monito
 
 ***Monitor Services Dashboard***
 
-![Monitor Services](https://raw.githubusercontent.com/stefanprodan/dockprom/master/screens/Grafana_Prometheus.png)
 
 The Monitor Services Dashboard shows key metrics for monitoring the containers that make up the monitoring stack:
 
@@ -228,14 +222,12 @@ ALERT jenkins_high_memory
 
 The AlertManager service is responsible for handling alerts sent by Prometheus server. 
 AlertManager can send notifications via email, Pushover, Slack, HipChat or any other system that exposes a webhook interface. 
-A complete list of integrations can be found [here](https://prometheus.io/docs/alerting/configuration).
 
 You can view and silence notifications by accessing `http://<host-ip>:9093`.
 
-The notification receivers can be configured in [alertmanager/config.yml](https://github.com/stefanprodan/dockprom/blob/master/alertmanager/config.yml) file.
+The notification receivers can be configured in alertmanager/config.yml
 
 To receive alerts via Slack you need to make a custom integration by choose ***incoming web hooks*** in your Slack team app page. 
-You can find more details on setting up Slack integration [here](http://www.robustperception.io/using-slack-with-the-alertmanager/).
 
 Copy the Slack Webhook URL into the ***api_url*** field and specify a Slack ***channel***.
 
@@ -250,10 +242,8 @@ receivers:
             text: "{{ .CommonAnnotations.description }}"
             username: 'Prometheus'
             channel: '#<channel>'
-            api_url: 'https://hooks.slack.com/services/<webhook-id>'
+            api_url: 'https://hooks.slack.com/services/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'
 ```
-
-![Slack Notifications](https://raw.githubusercontent.com/stefanprodan/dockprom/master/screens/Slack_Notifications.png)
 
 ## Sending metrics to the Pushgateway
 
